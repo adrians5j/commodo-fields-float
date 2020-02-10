@@ -27,12 +27,12 @@ import { compose } from "ramda";
 import { withFields, string } from "@commodo/fields";
 import { float } from "commodo-fields-float";
 
-const Company = compose(
+const Product = compose(
   withFields({
     name: string(),
-    year: float()
+    price: float()
   })
-)(function() {});
+)();
 ```
 
 ## Contributors
