@@ -14,6 +14,9 @@ test("should accept float values", () => {
     model.attribute = 0.1;
     expect(model.attribute).toEqual(0.1);
 
+    model.attribute = 1.0000000;
+    expect(model.attribute).toEqual(1);
+
     model.attribute = 1.01;
     expect(model.attribute).toEqual(1.01);
 
@@ -27,7 +30,7 @@ test("should accept float values", () => {
     expect(model.attribute).not.toBeDefined();
 });
 
-["1", "0", "0.5", {}, 1.0, 11, 21231321, 2.00000, [], true, false, Infinity, -Infinity].forEach(value => {
+["1", "0", "0.5", {}, [], true, false, Infinity, -Infinity].forEach(value => {
     test(`shouldn't accept ${typeof value}`, async () => {
         const model = new Model();
 

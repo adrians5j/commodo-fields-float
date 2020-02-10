@@ -4,7 +4,7 @@ import withFieldDataTypeValidation from "@commodo/fields/fields/withFieldDataTyp
 function float({ list, ...rest } = {}) {
     return withFieldDataTypeValidation(
         value =>
-            typeof value === "number" && value > -Infinity && value < Infinity && value % 1 !== 0
+            typeof value === "number" && value > -Infinity && value < Infinity
     )(createField({ ...rest, list, type: "float" }));
 }
 
