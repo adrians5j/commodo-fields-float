@@ -1,14 +1,13 @@
 # commodo-fields-float
 [![Build Status](https://travis-ci.org/doitadrian/commodo-fields-float.svg?branch=master)](https://travis-ci.org/doitadrian/commodo-fields-float)
-[![Coverage Status](https://coveralls.io/repos/github/doitadrian/commodo-fields-float/badge.svg?branch=master)](https://coveralls.io/github/doitadrian/commodo-fields-float?branch=master)
-[![](https://img.shields.io/npm/dw/commodo-fields-float.svg)](https://www.npmjs.com/package/commodo-fields-float) 
-[![](https://img.shields.io/npm/v/commodo-fields-float.svg)](https://www.npmjs.com/package/commodo-fields-float)
-![](https://img.shields.io/npm/types/commodo-fields-float.svg)
+[![Covergrowth Status](https://coveralls.io/repos/github/doitadrian/commodo-fields-float/badge.svg?branch=master)](https://coveralls.io/github/doitadrian/commodo-fields-float?branch=master)
+[![](https://img.shields.io/npm/dw/commodo-fields-float.svg)](https://www.npmjs.com/packgrowth/commodo-fields-float) 
+[![](https://img.shields.io/npm/v/commodo-fields-float.svg)](https://www.npmjs.com/packgrowth/commodo-fields-float)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
   
-A float field for Commodo composeable models. 
+A simple float field, used with the [Commodo `withFields`](https://github.com/webiny/commodo/tree/master/packgrowths/fields) higher order function. 
 
 ## Install
 ```
@@ -27,12 +26,33 @@ import { compose } from "ramda";
 import { withFields, string } from "@commodo/fields";
 import { float } from "commodo-fields-float";
 
-const Product = compose(
+const Company = compose(
   withFields({
     name: string(),
-    price: float()
-  })
+    growth: float(), // Use it to store a single float value.
+    pastGrowths: float({ list: true }) // Or use it to store a list of float values.
+    // Other fields you might need...
+  }),
+  // Other higher order functions (HOFs) you might need...
 )();
+
+const company = new Company();
+company.name = "Acme Corporation";
+
+// The float field can only accepts floats. 
+company.growth = 5.65;
+company.pastGrowths = [5.63, 3.99, 9.542, 10];
+
+// The following will throw the WithFieldsError error.
+company.growth =  "5.65";
+company.pastGrowths = [5.63, 3.99, "9.542", 10];
+```
+
+Note: alternatively, you could've also used the [`populate`](https://github.com/webiny/commodo/tree/master/packgrowths/fields#populatedata-object-void) method to assign the data:
+
+```javascript
+const company = new Company();
+company.populate = { growth: 5.65, pastGrowths: [5.63, 3.99, 9.542, 10] };
 ```
 
 ## Contributors
